@@ -1,20 +1,19 @@
 import PropTypes from 'prop-types';
-import css from './Filter.module.css'
+import { FilterForm, FilterTitle } from './Filter.styled';
 
 export const Filter = ({filter, onFilterChange }) => {
 	return (
 		<>
-			<form className={css.filter}>
-				<label className={css.name}>
+			<FilterForm>
+				<FilterTitle>
 					<span>Find contact by name</span>
 					<input
 						type="text"
 						value={filter}
 						onChange={onFilterChange}
-						className={css.input}
 					/>
-				</label>
-			</form>
+				</FilterTitle>
+			</FilterForm>
 		</>
 	)
 }

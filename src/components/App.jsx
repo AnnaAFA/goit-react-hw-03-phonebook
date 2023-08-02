@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
+import { MainWrapper } from './App.styled';
 
 
 export class App extends Component {
@@ -19,7 +20,7 @@ export class App extends Component {
     this.setState({ contacts });
 }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     if (prevState.contacts.length !== this.state.contacts.length) {
       const stringifiedContacts = JSON.stringify(this.state.contacts);
       localStorage.setItem('contacts', stringifiedContacts)
@@ -56,14 +57,16 @@ export class App extends Component {
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
     return (
-      <div>
+      <MainWrapper>
         <h1>Phonebook</h1>
         <ContactForm onAddContact={this.onAddContact}/>
 
         <h2>Contacts</h2>
         <Filter onFilterChange={this.onFilterByName} filter={this.state.filter}/>
-        <ContactList onRemoveContact={this.onRemoveContact} contacts={filterContact} />
-      </div>
+        
+        {this.state.contacts.length > 0 && (<ContactList onRemoveContact={this.onRemoveContact} contacts={filterContact} />)}
+        
+      </MainWrapper>
     )
   }
 }

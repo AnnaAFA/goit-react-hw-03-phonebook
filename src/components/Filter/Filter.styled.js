@@ -1,4 +1,6 @@
-.filter {
+import styled from '@emotion/styled';
+
+export const FilterForm = styled.form`
   display: flex;
   flex-direction: column;
   border: 2px solid rgb(82, 132, 206);
@@ -7,10 +9,11 @@
   align-items: center;
   border-radius: 10px;
   margin-bottom: 20px;
-}
+`;
 
-.name {
-  display: flex;
+export const FilterTitle = styled.label`
+display: flex;
   flex-direction: column;
   gap: 10px;
 }
+`;
