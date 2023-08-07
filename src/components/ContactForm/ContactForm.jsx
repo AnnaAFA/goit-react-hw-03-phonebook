@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
-import { ContactButton, FormWrapper, LabelWrapper } from './ContactForm.styled.js';
+import {
+  ContactButton,
+  FormWrapper,
+  LabelWrapper,
+} from './ContactForm.styled.js';
+
 export class ContactForm extends Component {
   state = {
     name: '',
-    number: ''
- }
+    number: '',
+  };
 
   onInputChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
   onSubmit = e => {
     e.preventDefault();
@@ -22,8 +27,8 @@ export class ContactForm extends Component {
       number: this.state.number,
     };
     this.props.onAddContact(contact);
-    this.reset()
-  }
+    this.reset();
+  };
 
   reset = () => {
     this.setState({
@@ -31,17 +36,18 @@ export class ContactForm extends Component {
       number: '',
     });
   };
+
   render() {
-  const { name, number } = this.state;
+    const { name, number } = this.state;
     return (
       <>
-        <FormWrapper onSubmit={this.onSubmit} >
+        <FormWrapper onSubmit={this.onSubmit}>
           <LabelWrapper>
             <span>Name</span>
             <input
               type="text"
               name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash, and spaces. For example: Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
               value={name}
@@ -53,7 +59,7 @@ export class ContactForm extends Component {
             <input
               type="tel"
               name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
               value={number}
@@ -61,13 +67,11 @@ export class ContactForm extends Component {
             />
           </LabelWrapper>
 
-          <ContactButton type="submit">
-            Add contact
-          </ContactButton>
+          <ContactButton type="submit">Add contact</ContactButton>
         </FormWrapper>
       </>
-    )
- }
+    );
+  }
 }
 
 ContactForm.propTypes = {
